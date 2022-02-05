@@ -24,3 +24,4 @@ echo "$password" >> "$tempFile"
 
 
 sudo "$openvpn" --config "$vpnPath" --auth-user-pass "$tempFile" 
+rm -rf "$tempFile"
