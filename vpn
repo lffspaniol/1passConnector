@@ -1,0 +1,26 @@
+#!/usr/local/bin/bash
+
+echo "Starting up..."
+
+tempFile=$(mktemp)
+
+openvpn="openvpn"
+
+key=$1
+vpnPath=$2
+
+echo "Getting VPN credentials..."
+if [[ ! $(op get account) ]]; then
+  eval "$(op signin)"
+fi;
+item=$(op get item "$key")
+
+echo "Got VPN credentials"
+user=$(echo "$item" | jq -r ".details.fields | .[] | select(.designation == \"username\") | .value")
+password=$(echo "$item" | jq -r ".details.fields | .[] | select(.designation == \"password\") | .value")
+
+echo "$user" > "$tempFile"
+echo "$password" >> "$tempFile"
+
+
+sudo "$openvpn" --config "$vpnPath" --auth-user-pass "$tempFile" 
