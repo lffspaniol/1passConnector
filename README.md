@@ -2,7 +2,7 @@
 
 ### simple openvpn connector
 
-- Install on pass cli [download](https://1password.com/pt/downloads/command-line/)
+- Install 1pass cli [download](https://1password.com/pt/downloads/command-line/)
 
 - Install [jq](https://stedolan.github.io/jq/)
 
